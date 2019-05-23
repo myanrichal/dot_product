@@ -5,18 +5,20 @@ import (
 	"fmt"
 )
 
+//Print array
 func SmartPrint(a [][]int) {
 	for _, i := range a {
-		fmt.Print("|")
+		fmt.Print("| ")
 		for _, j := range i {
-			fmt.Print(j)
+			fmt.Print(j, " ")
 		}
 		fmt.Println("|")
 	}
 	fmt.Print("\n")
 }
 
-func verifyMatrix(a [][]int) (error, int) {
+//Verify the Matrix is complete
+func VerifyMatrix(a [][]int) (error, int) {
 	var b []int
 	for _, h := range a {
 		b = append(b, len(h))
@@ -33,19 +35,17 @@ func verifyMatrix(a [][]int) (error, int) {
 	return nil, b[0]
 }
 
+//Verify the matricies can be multipled
 func VerifyCompatiable(a [][]int, b [][]int) error {
 
-	err, size_a := verifyMatrix(a)
+	err, size_a := VerifyMatrix(a)
 	if err != nil {
 		return err
 	}
-	err, _ = verifyMatrix(b)
+	err, _ = VerifyMatrix(b)
 	if err != nil {
 		return err
 	}
-
-	// fmt.Println("size_a: ", size_a)
-	// fmt.Println("len: ", len(b))
 
 	if size_a != len(b) {
 		err := errors.New("Sizes are not compatiable")
@@ -54,8 +54,9 @@ func VerifyCompatiable(a [][]int, b [][]int) error {
 	return nil
 }
 
+//transpose matrix
 func Transpose(matrix [][]int) ([][]int, error) {
-	err, width := verifyMatrix(matrix)
+	err, width := VerifyMatrix(matrix)
 	if err != nil {
 		return nil, err
 	}
